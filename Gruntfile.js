@@ -184,10 +184,15 @@ module.exports = function(grunt) {
   // Default task.
   grunt.registerTask('default', ['jshint', 'qunit', 'concat', 'uglify']);
 
-  grunt.registerTask('prod', ['critical']);
+  // Tasks for production.
+  grunt.registerTask('prod', ['critical', 'minify']);
   grunt.registerTask('minify', ['cssmin']);
+
+  // Image optimization.
   grunt.registerTask('image', ['imageoptim']);
   grunt.registerTask('img-responsive', ['responsive_images']);
+
+  // Tasks for PageSpped.
   grunt.registerTask('speedtest', ['pagespeed']);
   grunt.registerTask('pagespeed-desk', ['pagespeed:prod_desktop']);
   grunt.registerTask('pagespeed-mobi', ['pagespeed:prod_mobile']);
