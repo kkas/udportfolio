@@ -12,5 +12,6 @@
     "grunt-contrib-watch": "~0.6.1",
     "grunt-critical": "^0.1.7",
     "grunt-responsive-images": "^0.1.7"
+    "grunt-pagespeed": "^1.0.0"
   }
 }

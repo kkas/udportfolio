@@ -91,6 +91,27 @@ module.exports = function(grunt) {
         src: ['img/*.jpg', 'views/images/*.jpg']
       }
     },
+    pagespeed: {
+      options: {
+        nokey: true
+      },
+      prod_desktop: {
+        options: {
+          url: "http://kkas.github.io/udportfolio/",
+          locale: "en_GB",
+          strategy: "desktop",
+          threshold: 90
+        }
+      },
+      prod_mobile: {
+        options: {
+          url: "http://kkas.github.io/udportfolio/",
+          locale: "en_GB",
+          strategy: "mobile",
+          threshold: 90
+        }
+      },
+    },
     concat: {
       options: {
         banner: '<%= banner %>',
@@ -158,6 +179,7 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-responsive-images');
   grunt.loadNpmTasks('grunt-contrib-cssmin');
   grunt.loadNpmTasks('grunt-critical');
+  grunt.loadNpmTasks('grunt-pagespeed');
 
   // Default task.
   grunt.registerTask('default', ['jshint', 'qunit', 'concat', 'uglify']);
@@ -166,4 +188,7 @@ module.exports = function(grunt) {
   grunt.registerTask('minify', ['cssmin']);
   grunt.registerTask('image', ['imageoptim']);
   grunt.registerTask('img-responsive', ['responsive_images']);
+  grunt.registerTask('speedtest', ['pagespeed']);
+  grunt.registerTask('pagespeed-desk', ['pagespeed:prod_desktop']);
+  grunt.registerTask('pagespeed-mobi', ['pagespeed:prod_mobile']);
 };
