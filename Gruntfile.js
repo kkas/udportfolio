@@ -11,6 +11,24 @@ module.exports = function(grunt) {
       '* Copyright (c) <%= grunt.template.today("yyyy") %> <%= pkg.author.name %>;' +
       ' Licensed <%= _.pluck(pkg.licenses, "type").join(", ") %> */\n',
     // Task configuration.
+    imageoptim: {
+      myPngs: {
+        options: {
+          jpegMini: false,
+          imageAlpha: true,
+          quitAfter: true
+        },
+        src: ['img/*.png']
+      },
+      myJpgs: {
+        options: {
+          jpegMini: true,
+          imageAlpha: false,
+          quitAfter: true
+        },
+        src: ['img/*.jpg']
+      }
+    },
     concat: {
       options: {
         banner: '<%= banner %>',
@@ -74,8 +92,10 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-qunit');
   grunt.loadNpmTasks('grunt-contrib-jshint');
   grunt.loadNpmTasks('grunt-contrib-watch');
+  grunt.loadNpmTasks('grunt-imageoptim');
 
   // Default task.
   grunt.registerTask('default', ['jshint', 'qunit', 'concat', 'uglify']);
 
+  grunt.registerTask('image', ['imageoptim']);
 };
