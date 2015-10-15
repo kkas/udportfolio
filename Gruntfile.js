@@ -11,6 +11,24 @@ module.exports = function(grunt) {
       '* Copyright (c) <%= grunt.template.today("yyyy") %> <%= pkg.author.name %>;' +
       ' Licensed <%= _.pluck(pkg.licenses, "type").join(", ") %> */\n',
     // Task configuration.
+    responsive_images: {
+      mytask: {
+        options: {
+          engine: 'im',
+          newFilesOnly: false,
+          rename: false,
+          quality: 50,
+          sizes: [{
+            width: 720,
+            height: 540
+          }]
+        },
+        files: [{
+          expand: true,
+          src: ['views/images/pizzeria.jpg']
+        }]
+      }
+    },
     imageoptim: {
       myPngs: {
         options: {
@@ -93,9 +111,11 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-jshint');
   grunt.loadNpmTasks('grunt-contrib-watch');
   grunt.loadNpmTasks('grunt-imageoptim');
+  grunt.loadNpmTasks('grunt-responsive-images');
 
   // Default task.
   grunt.registerTask('default', ['jshint', 'qunit', 'concat', 'uglify']);
 
   grunt.registerTask('image', ['imageoptim']);
+  grunt.registerTask('img-responsive', ['responsive_images']);
 };
