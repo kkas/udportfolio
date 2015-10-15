@@ -56,11 +56,15 @@ module.exports = function(grunt) {
         options: {
           engine: 'im',
           newFilesOnly: false,
-          rename: false,
+          rename: true,
           quality: 50,
           sizes: [{
             width: 720,
             height: 540
+          },
+          {
+            width: 100,
+            height: 75
           }]
         },
         files: [{
