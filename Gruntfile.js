@@ -124,11 +124,13 @@ module.exports = function(grunt) {
     },
     uglify: {
       options: {
-        banner: '<%= banner %>'
+        mangle: false,
       },
-      dist: {
-        src: '<%= concat.dist.dest %>',
-        dest: 'dist/<%= pkg.name %>.min.js'
+      my_target: {
+        files: {
+          'js/perfmatters.min.js': ['js/perfmatters.js'],
+          'views/js/main.min.js': ['views/js/main.js']
+        }
       }
     },
     jshint: {
@@ -186,7 +188,7 @@ module.exports = function(grunt) {
 
   // Tasks for production.
   grunt.registerTask('prod', ['critical', 'minify']);
-  grunt.registerTask('minify', ['cssmin']);
+  grunt.registerTask('minify', ['cssmin', 'uglify']);
 
   // Image optimization.
   grunt.registerTask('image', ['imageoptim']);
