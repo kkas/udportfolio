@@ -13,6 +13,7 @@ module.exports = function(grunt) {
     // Task configuration.
     cssmin: {
       options: {
+        keepBreaks: false,
         mergeAdjacent: true
       },
       target1: {
