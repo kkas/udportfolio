@@ -11,6 +11,22 @@ module.exports = function(grunt) {
       '* Copyright (c) <%= grunt.template.today("yyyy") %> <%= pkg.author.name %>;' +
       ' Licensed <%= _.pluck(pkg.licenses, "type").join(", ") %> */\n',
     // Task configuration.
+    critical: { // https://github.com/bezoerb/grunt-critical
+      test: {
+        options: {
+            base: './',
+            css: [
+                'test/fixture/styles/style-mobile.css',
+                'test/fixture/styles/style.css'
+            ]
+            // ],
+            // width: 320,
+            // height: 70
+        },
+        src: 'test/fixture/index.html',
+        dest: 'test/generated/index-critical.html'
+      }
+    },
     cssmin: {
       options: {
         keepBreaks: false,
@@ -137,10 +153,12 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-imageoptim');
   grunt.loadNpmTasks('grunt-responsive-images');
   grunt.loadNpmTasks('grunt-contrib-cssmin');
+  grunt.loadNpmTasks('grunt-critical');
 
   // Default task.
   grunt.registerTask('default', ['jshint', 'qunit', 'concat', 'uglify']);
 
+  grunt.registerTask('prod', ['critical']);
   grunt.registerTask('minify', ['cssmin']);
   grunt.registerTask('image', ['imageoptim']);
   grunt.registerTask('img-responsive', ['responsive_images']);
