@@ -18,7 +18,7 @@ module.exports = function(grunt) {
           imageAlpha: true,
           quitAfter: true
         },
-        src: ['img/*.png']
+        src: ['img/*.png', 'views/images/*.png']
       },
       myJpgs: {
         options: {
@@ -26,7 +26,7 @@ module.exports = function(grunt) {
           imageAlpha: false,
           quitAfter: true
         },
-        src: ['img/*.jpg']
+        src: ['img/*.jpg', 'views/images/*.jpg']
       }
     },
     concat: {
