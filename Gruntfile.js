@@ -11,6 +11,29 @@ module.exports = function(grunt) {
       '* Copyright (c) <%= grunt.template.today("yyyy") %> <%= pkg.author.name %>;' +
       ' Licensed <%= _.pluck(pkg.licenses, "type").join(", ") %> */\n',
     // Task configuration.
+    cssmin: {
+      options: {
+        mergeAdjacent: true
+      },
+      target1: {
+        files: [{
+          expand: true,
+          cwd: 'css',
+          src: ['*.css', '!*.min.css'],
+          dest: 'css',
+          ext: '.min.css'
+        }]
+      },
+      target2: {
+        files: [{
+          expand: true,
+          cwd: 'views/css',
+          src: ['*.css', '!*.min.css'],
+          dest: 'views/css',
+          ext: '.min.css'
+        }]
+      }
+    },
     responsive_images: {
       mytask: {
         options: {
@@ -112,10 +135,12 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-watch');
   grunt.loadNpmTasks('grunt-imageoptim');
   grunt.loadNpmTasks('grunt-responsive-images');
+  grunt.loadNpmTasks('grunt-contrib-cssmin');
 
   // Default task.
   grunt.registerTask('default', ['jshint', 'qunit', 'concat', 'uglify']);
 
+  grunt.registerTask('minify', ['cssmin']);
   grunt.registerTask('image', ['imageoptim']);
   grunt.registerTask('img-responsive', ['responsive_images']);
 };
